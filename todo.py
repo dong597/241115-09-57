@@ -46,7 +46,7 @@ async def update_todo(todo_data: todoitem, todo_id: int = Path(...,title="변경
 
 # 전체 목록 삭제하기
 @todo_router.delete("/todo")
-async def delete_all_todo(todo:todo) -> dict:
+async def delete_all_todo() -> dict:
     todo_list.clear()
     return {
             "message": "all todo delete"
@@ -55,9 +55,9 @@ async def delete_all_todo(todo:todo) -> dict:
 # 특정 item 삭제하기
 @todo_router.delete("/todo/{todo_id}")
 async def delete_single_todo(todo_id: int = Path(...,title="삭제될 아이템의 id")) -> dict:
-    for todo in todo_list:
+    for todo in range(len(todo_list)):
         if todo.id == todo_id:
-            todo_list.pop(todo_id)
+            todo_list.pop(todo)
             return {
                 "message" : "this item is delete"
             }
